@@ -49,8 +49,6 @@ chrome.storage.local.get(null, console.log)
 
 ## 🔎 Screenshots
 
-_You can add screenshots here if you want_
-
 ---
 
 ## 📄 License
