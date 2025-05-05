@@ -1,0 +1,81 @@
+.gpt-menu {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.gpt-chat-frame {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 400px;
+  height: 450px;
+  background: white;
+  border: 2px solid black;
+  z-index: 10000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  border-radius: 8px;
+}
+
+#chat-container {
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#response {
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+#followups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+#followups button {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#followups button:hover {
+  background-color: #e0e0e0;
+}
+
+textarea {
+  width: 100%;
+  height: 60px;
+  resize: none;
+  margin-bottom: 5px;
+}
+
+button#send {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button#send:hover {
+  background-color: #45a049;
+}
