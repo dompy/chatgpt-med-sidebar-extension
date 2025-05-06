@@ -4,6 +4,8 @@ A Chrome extension for clinicians and medical professionals that explains select
 
 ---
 
+![ChatGPT Med Sidebar Demo](demo.gif)
+
 ## 🩺 What it does
 
 - 💬 Explains selected words or sentences with a short, professional GPT-3.5 response
