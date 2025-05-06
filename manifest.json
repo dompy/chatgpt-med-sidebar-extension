@@ -11,17 +11,21 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["https://*/*", "http://*/*"],
       "js": ["content.js"],
       "css": ["styles.css"]
     }
   ],
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ],  
   "web_accessible_resources": [
     {
       "resources": ["chat.html", "styles.css"],
-      "matches": ["<all_urls>"]
+      "matches": ["https://*/*", "http://*/*"]
     }
-  ],
+  ],  
   "options_page": "options.html"
 }
 
