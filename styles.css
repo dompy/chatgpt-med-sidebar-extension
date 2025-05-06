@@ -4,7 +4,8 @@
   height: 100%;
   box-sizing: border-box;
   padding: 10px;
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  background-color: #f7f7f8;
 }
 
 #response {
@@ -17,30 +18,35 @@
 }
 
 #response .user {
-  background-color: #0fc8e1;
-  border: 1px solid #b2ebf2;
+  background-color: #e6f1ff;
   border-radius: 12px;
-  padding: 8px 12px;
+  padding: 10px 14px;
   align-self: flex-end;
+  max-width: 80%;
   white-space: pre-wrap;
+  color: #1a1a1a;
+  border: 1px solid #cfe0f2;
 }
 
 #response .assistant {
-  background-color: #9da9e1;
-  border: 1px solid #dcedc8;
+  background-color: #d1e7dd;
   border-radius: 12px;
-  padding: 8px 12px;
+  padding: 10px 14px;
   align-self: flex-start;
+  max-width: 80%;
   white-space: pre-wrap;
+  color: #1a1a1a;
+  border: 1px solid #bcd0c7;
 }
 
 #response .system {
-  background-color: #fff3e0;
-  border: 1px solid #ffe0b2;
+  background-color: #fff4e6;
   border-radius: 12px;
   padding: 8px 12px;
   font-style: italic;
   white-space: pre-wrap;
+  border: 1px solid #ffe1ba;
+  color: #6e6e6e;
 }
 
 #followups {
@@ -51,17 +57,18 @@
 }
 
 #followups button {
-  padding: 6px 10px;
-  font-size: 0.85rem;
-  background-color: #f0f0f0;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  background-color: #e6e6e6;
   border: 1px solid #ccc;
   border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  color: #222;
 }
 
 #followups button:hover {
-  background-color: #e0e0e0;
+  background-color: #d0d0d0;
 }
 
 textarea#input {
@@ -69,11 +76,13 @@ textarea#input {
   height: 60px;
   resize: none;
   margin-top: 10px;
-  padding: 8px;
-  font-size: 0.95rem;
+  padding: 10px;
+  font-size: 1rem;
   border-radius: 8px;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  background: white;
+  color: #1a1a1a;
 }
 
 button#send {
@@ -81,7 +90,7 @@ button#send {
   margin-top: 5px;
   padding: 10px;
   font-size: 1rem;
-  background-color: #4CAF50;
+  background-color: #10a37f;
   color: white;
   border: none;
   border-radius: 8px;
@@ -90,5 +99,19 @@ button#send {
 }
 
 button#send:hover {
-  background-color: #45a049;
+  background-color: #0d8a6b;
+}
+
+.gpt-menu {
+  background-color: #10a37f;
+  color: white;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  position: absolute;
+  z-index: 9999;
+  border: none;
 }

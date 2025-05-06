@@ -30,7 +30,7 @@ function showMenu(selectedText, event) {
   menu.id = "gpt-menu";
   menu.innerText = "💬 Explain";
   menu.style.position = "absolute";
-  menu.style.top = `${window.scrollY + rect.top - 30}px`; // oberhalb der Markierung
+  menu.style.top = `${window.scrollY + rect.top + 30}px`; // oberhalb der Markierung
   menu.style.left = `${window.scrollX + rect.left}px`;
   menu.style.zIndex = 9999;
   menu.className = "gpt-menu";
