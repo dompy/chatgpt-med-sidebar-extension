@@ -1,37 +1,47 @@
-# ChatGPT Sidebar Extension
+# ChatGPT Med Sidebar
 
-This is a Chrome extension that allows you to select text on any website and open a floating ChatGPT assistant, which:
+A Chrome extension for clinicians and medical professionals that explains selected terms using ChatGPT – directly on any website.
 
-- 🧠 Explains the selected term or sentence in a compact overlay
-- 💬 Lets you chat further in a floating iframe
-- 🤖 Generates smart follow-up questions based on context
-- 🩺 Is optimized for clinical and medical professionals (precise, technical answers)
+---
+
+## 🩺 What it does
+
+- 💬 Explains selected words or sentences with a short, professional GPT-3.5 response
+- 🧠 Chat continues in a compact overlay window with full history
+- 🔄 Suggests dynamic, relevant follow-up questions (auto-generated)
+- 🖥️ Clean UI based on ChatGPT design, optimized for quick clinical reading
 
 ---
 
 ## 💻 Features
 
-- Context-aware GPT-3.5 chat in a sidebar overlay
-- Professional-level responses for medical users
-- Automatically generates follow-up question buttons
-- Chat history shown inline (user/assistant layout)
-- Clean design with floating UI and full keyboard input
-- Uses your own `sk-proj-...` API key and project ID via `options.html`
+- Medical context-aware explanations
+- Smart follow-up buttons
+- User/assistant chat bubbles with alignment
+- Input field + send button with keyboard support
+- Modern GPT-style colors and fonts
+- Local API key + project ID handling via settings page
 
 ---
 
-## 🔧 Setup
+## 🚀 How to use
 
-1. Clone or download this repo
-2. Open `chrome://extensions`
-3. Enable **Developer mode**
-4. Click **"Load unpacked"**, select this folder
-5. Click the puzzle icon → pin the extension
+1. Load the extension via `chrome://extensions` (Developer mode → "Load unpacked")
+2. Go to any webpage
+3. Select a term → 💬 “Explain” button appears
+4. Click to open sidebar chat
 
-Then:
-- Visit any website
-- Select text → 💬 button appears → click it
-- ChatGPT iframe opens at the bottom right
+> Make sure to set your OpenAI `apiKey` and `projectId` via the options page first.
+
+---
+
+## 🛠 Setup
+
+1. Clone or download this repository
+2. Open Chrome and go to `chrome://extensions`
+3. Enable Developer Mode
+4. Click "Load unpacked" → select this folder
+5. Configure your API key under Extension Options
 
 ---
 
@@ -39,22 +49,23 @@ Then:
 
 You must provide your own OpenAI API Key and Project ID:
 
-1. Click on the extension options
-2. Paste your `sk-proj-...` API key and project ID
-3. Save → reload the extension
+1. Click the extension icon → right-click → "Options"
+2. Paste your `sk-proj-...` API key and your project ID
+3. Save and reload
 
 ---
 
-## 📦 Files
+## 📦 Key Files
 
-- `popup.js` – chat logic
-- `content.js` – injects explain button
-- `chat.html` – the embedded UI
-- `styles.css` – layout and chat styling
-- `options.html` / `save.js` – manage API key
+- `popup.js` – chat interface logic
+- `content.js` – selection handler and trigger button
+- `chat.html` – iframe chat container
+- `styles.css` – interface styling
+- `options.html` – key entry form
+- `manifest.json` – Chrome Extension definition
 
 ---
 
 ## 📘 License
 
-MIT – use freely & responsibly.
+MIT – free to use, modify, and share with attribution.
