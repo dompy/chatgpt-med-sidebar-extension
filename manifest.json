@@ -3,7 +3,11 @@
   "name": "ChatGPT Med Sidebar",
   "version": "1.3",
   "description": "Select medical terms on any page and get professional explanations from ChatGPT – tailored for physicians and clinical use.",
-  "permissions": ["storage", "scripting", "activeTab"],
+  "permissions": [
+    "storage",
+    "scripting",
+    "activeTab"
+  ],
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -19,14 +23,17 @@
   "host_permissions": [
     "https://*/*",
     "http://*/*"
-  ],  
+  ],
   "web_accessible_resources": [
     {
-      "resources": ["chat.html", "styles.css"],
-      "matches": ["https://*/*", "http://*/*"]
+      "resources": [
+        "chat.html",
+        "styles.css",
+        "marked.min.js",
+        "dompurify.min.js"
+      ],
+      "matches": ["<all_urls>"]
     }
-  ],  
+  ],
   "options_page": "options.html"
 }
-
-

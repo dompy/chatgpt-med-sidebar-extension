@@ -5,7 +5,7 @@
   box-sizing: border-box;
   padding: 10px;
   font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-  background-color: #f7f7f8;
+  background-color: #ffffff;
 }
 
 #response {
@@ -17,6 +17,7 @@
   padding-right: 10px;
 }
 
+/* User message bubble */
 #response .user {
   background-color: #e6f1ff;
   border-radius: 12px;
@@ -28,17 +29,38 @@
   border: 1px solid #cfe0f2;
 }
 
+/* Assistant message bubble */
 #response .assistant {
-  background-color: #d1e7dd;
+  background-color: #ffffff;
+  border: 1px solid #e2e2e5;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   border-radius: 12px;
   padding: 10px 14px;
   align-self: flex-start;
   max-width: 80%;
   white-space: pre-wrap;
   color: #1a1a1a;
-  border: 1px solid #bcd0c7;
 }
 
+/* Tightened spacing for Markdown elements in assistant bubble */
+#response .assistant h2 {
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}
+
+#response .assistant h3 {
+  margin-block-start: 0.4em;
+  margin-block-end: 0.4em;
+}
+
+#response .assistant p,
+#response .assistant ul,
+#response .assistant ol {
+  margin-block-start: 0.3em;
+  margin-block-end: 0.8em;
+}
+
+/* System message bubble */
 #response .system {
   background-color: #fff4e6;
   border-radius: 12px;

@@ -1,25 +1,52 @@
-console.log("✅ content.js wurde geladen");
+// content.js
+// Listens for text selection and opens a ChatGPT popup iframe with ChatGPT Med Sidebar
+
+console.log("✅ content.js loaded");
+
 let lastClickPosition = { x: 0, y: 0 };
 let ignoreNextMouseup = false;
+let chatWindow = null;
 
-document.addEventListener("mouseup", (event) => {
-  // 👉 Wenn das Klickziel das Menü ist → abbrechen
-  if (event.target.closest("#gpt-menu")) return;
+// Hoisted function declaration for opening chat iframe
+function openChatWindow(selectedText) {
+  console.log("💬 Opening chat for:", selectedText);
 
-  if (ignoreNextMouseup) {
-    ignoreNextMouseup = false;
-    return;
+  // Remove existing iframe if any
+  if (chatWindow) {
+    chatWindow.remove();
+    chatWindow = null;
   }
 
-  const selection = window.getSelection().toString().trim();
-  if (selection.length > 0) {
-    showMenu(selection, event);
-  } else {
-    removeMenu();
-  }
-});
+  chatWindow = document.createElement("iframe");
+  chatWindow.className = "gpt-chat-frame";
+  chatWindow.style.position = "absolute";
+  chatWindow.style.width = "400px";
+  chatWindow.style.height = "500px";
+  chatWindow.style.zIndex = "10000";
+  chatWindow.style.border = "2px solid #ccc";
+  chatWindow.style.borderRadius = "8px";
+  chatWindow.style.boxShadow = "0 4px 12px rgba(0,0,0,0.3)";
+  chatWindow.style.background = "white";
 
+  const src = chrome.runtime.getURL("chat.html") + `?q=${encodeURIComponent(selectedText)}`;
+  chatWindow.src = src;
 
+  document.body.appendChild(chatWindow);
+
+  // Position iframe just below last click position
+  chatWindow.style.left = `${lastClickPosition.x}px`;
+  chatWindow.style.top = `${lastClickPosition.y + 10}px`;
+
+  console.log("✅ iframe loaded with src:", src);
+}
+
+// Remove context menu if present
+function removeMenu() {
+  const old = document.getElementById("gpt-menu");
+  if (old) old.remove();
+}
+
+// Show custom "Explain" button near text selection
 function showMenu(selectedText, event) {
   removeMenu();
 
@@ -29,72 +56,58 @@ function showMenu(selectedText, event) {
   const menu = document.createElement("div");
   menu.id = "gpt-menu";
   menu.innerText = "💬 Explain";
-  menu.style.position = "absolute";
-  menu.style.top = `${window.scrollY + rect.top + 30}px`; // oberhalb der Markierung
-  menu.style.left = `${window.scrollX + rect.left}px`;
-  menu.style.zIndex = 9999;
   menu.className = "gpt-menu";
+  menu.style.position = "absolute";
+  menu.style.top = `${window.scrollY + rect.top - 30}px`;
+  menu.style.left = `${window.scrollX + rect.left}px`;
+  menu.style.zIndex = "9999";
 
-  menu.addEventListener("mousedown", (e) => {
+  // Prevent re-trigger on mousedown
+  menu.addEventListener("mousedown", e => {
     e.stopPropagation();
     e.preventDefault();
   });
 
-  menu.addEventListener("click", (e) => {
-    console.log("👉 Menü wurde geklickt.");
+  menu.addEventListener("click", e => {
+    console.log("👉 Menu clicked");
     ignoreNextMouseup = true;
     lastClickPosition = {
       x: window.scrollX + rect.left,
       y: window.scrollY + rect.bottom
-    }; // Chatfenster knapp unterhalb
+    };
     openChatWindow(selectedText);
     removeMenu();
   });
 
   document.body.appendChild(menu);
-  console.log("📍 Menü wurde dem DOM hinzugefügt:", selectedText);
+  console.log("📍 Menu added for:", selectedText);
 }
 
+// Listen for text selection (mouseup)
+document.addEventListener("mouseup", event => {
+  // If clicking the menu itself, skip
+  if (event.target.closest("#gpt-menu")) return;
 
-function removeMenu() {
-  const oldMenu = document.getElementById("gpt-menu");
-  if (oldMenu) oldMenu.remove();
-}
+  if (ignoreNextMouseup) {
+    ignoreNextMouseup = false;
+    return;
+  }
 
-function openChatWindow(selectedText) {
-  console.log("💬 Chatfenster öffnen für:", selectedText);
+  const selected = window.getSelection().toString().trim();
+  if (selected) {
+    showMenu(selected, event);
+  } else {
+    removeMenu();
+  }
+});
 
-  const chatWindow = document.createElement("iframe");
-  const src = chrome.runtime.getURL("chat.html") + `?q=${encodeURIComponent(selectedText)}`;
-  chatWindow.src = src;
-  chatWindow.className = "gpt-chat-frame";
-
-  // 🧭 Positioniere anhand der letzten Klickposition
-  chatWindow.style.position = "absolute";
-  chatWindow.style.left = `${lastClickPosition.x}px`;
-  chatWindow.style.top = `${lastClickPosition.y + 25}px`; // etwas Abstand unter Menü
-  chatWindow.style.width = "400px";
-  chatWindow.style.height = "400px";
-  chatWindow.style.zIndex = "10000";
-  chatWindow.style.border = "2px solid black";
-  chatWindow.style.background = "white";
-  chatWindow.style.borderRadius = "8px";
-  chatWindow.style.boxShadow = "0 4px 12px rgba(0,0,0,0.3)";
-
-  chatWindow.onload = () => console.log("✅ iframe geladen mit src:", src);
-  chatWindow.onerror = (e) => console.error("❌ iframe-Fehler:", e);
-
-  document.body.appendChild(chatWindow);
-  console.log("📦 iframe wurde dem Body hinzugefügt");
-}
-
-
-document.addEventListener("click", (event) => {
-  const chatFrame = document.querySelector(".gpt-chat-frame");
+// Close chat iframe when clicking outside
+document.addEventListener("click", event => {
+  const frame = document.querySelector(".gpt-chat-frame");
   const menu = document.getElementById("gpt-menu");
-
-  if (chatFrame && !chatFrame.contains(event.target) && event.target !== menu) {
-    chatFrame.remove();
-    console.log("🧹 Chatfenster geschlossen durch Outside-Klick");
+  if (frame && !frame.contains(event.target) && event.target !== menu) {
+    frame.remove();
+    chatWindow = null;
+    console.log("🧹 Chat window closed");
   }
 }, true);
