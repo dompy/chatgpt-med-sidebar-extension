@@ -57,7 +57,7 @@ async function callGPT(content) {
         "Content-Type": "application/json",
         "OpenAI-Project": projectId
       },
-      body: JSON.stringify({ model: "gpt-3.5-turbo", messages, max_tokens: 300 })
+      body: JSON.stringify({ model: "gpt-4", messages, max_tokens: 300 })
     });
     if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`);
     const data = await res.json();
